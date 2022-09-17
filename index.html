@@ -15,8 +15,111 @@
     />
     <!-- TAILWIND CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- font awesome css cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- vanilla css -->
+    <link rel="stylesheet" href="style/style.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <header>
+      <!-- navbar start -->
+      <div class="navbar bg-slate-700 p-6">
+        <div class="flex-1 ml-7">
+          <img
+            class="w-10 md:w-14"
+            src="images/cart-logo.png"
+            alt="company logo"
+          />
+          <span
+            class="ml-3 md:ml-6 font-bold normal-case text-xl md:text-5xl text-white"
+            >Amin Bazar</span
+          >
+        </div>
+        <div class="flex-none gap-2">
+          <!-- navigation menu -->
+          <div class="text-white">
+            <ul class="gap-16 hidden md:flex mr-3">
+              <li>
+                <a
+                  class="text-2xl font-bold hover:text-blue-500 duration-500 cursor-pointer"
+                  ><i class="fa-solid fa-house mr-3 text-yellow-500"></i>Home</a
+                >
+              </li>
+              <li>
+                <a
+                  class="text-2xl font-bold hover:text-blue-500 duration-500 cursor-pointer"
+                  ><i class="fa-solid fa-heart mr-3 text-yellow-500"></i>Wish
+                  List</a
+                >
+              </li>
+              <li>
+                <a
+                  class="text-2xl font-bold hover:text-blue-500 duration-500 cursor-pointer"
+                  ><i class="fa-solid fa-trash mr-3 text-yellow-500"></i>Recycle
+                  Bin</a
+                >
+              </li>
+              <li class="relative">
+                <label
+                  for="my-drawer-4"
+                  class="drawer-button text-2xl font-bold hover:text-blue-500 duration-500 cursor-pointer"
+                  ><i class="fa-solid fa-cart-shopping mr-3 text-yellow-500"></i
+                ></label>
+                <div class="badge badge-secondary absolute bottom-7 left-6">
+                  0
+                </div>
+                <a class=""></a>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown dropdown-end block md:hidden">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+              <i class="fa-solid fa-bars"></i>
+            </label>
+            <ul
+              tabindex="0"
+              class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a><i class="fa-solid fa-house"></i>Home</a>
+              </li>
+              <li>
+                <a><i class="fa-solid fa-heart"></i>Wish List</a>
+              </li>
+              <li>
+                <a><i class="fa-solid fa-trash"></i>Recycle Bin</a>
+              </li>
+              <li>
+                <a><i class="fa-solid fa-cart-shopping"></i>Cart</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="drawer drawer-end">
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+          <!-- Page content here -->
+        </div>
+        <div class="drawer-side">
+          <label for="my-drawer-4" class="drawer-overlay"></label>
+          <ul
+            class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
+          >
+            <!-- Sidebar content here -->
+            <li><a>Sidebar Item 1</a></li>
+            <li><a>Sidebar Item 2</a></li>
+          </ul>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
