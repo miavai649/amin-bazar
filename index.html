@@ -69,7 +69,10 @@
                   class="drawer-button text-2xl font-bold hover:text-blue-500 duration-500 cursor-pointer"
                   ><i class="fa-solid fa-cart-shopping mr-3 text-yellow-500"></i
                 ></label>
-                <div class="badge badge-secondary absolute bottom-7 left-6">
+                <div
+                  class="badge badge-secondary absolute bottom-7 left-6"
+                  id="cart-count"
+                >
                   0
                 </div>
                 <a class=""></a>
@@ -116,76 +119,21 @@
           <!-- HOME PAGE -->
           <div
             class="max-w-[1280px] mx-10 lg:mx-auto grid md:grid-cols-3 sm:grid-cols-2 gap-5"
+            id="homepage-container"
           >
             <!-- cards here -->
-            <div class="card bg-base-900 shadow-2xl">
-              <figure class="p-5">
-                <img
-                  src="https://placeimg.com/400/225/arch"
-                  class="rounded-xl"
-                  alt="Shoes"
-                />
-              </figure>
-              <div class="card-body">
-                <!-- card title -->
-                <div class="flex justify-between">
-                  <h2 class="card-title text-2xl">Shoes!</h2>
-                  <div class="text-lg">
-                    <span
-                      ><i class="fa-solid fa-heart mr-4 text-slate-600"></i
-                    ></span>
-                    <span
-                      ><i class="fa-solid fa-square-minus text-red-700"></i
-                    ></span>
-                  </div>
-                </div>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <h3 class="text-xl font-bold">Price: 1200$</h3>
-                <div class="card-actions justify-between">
-                  <!-- The button to open modal -->
-                  <label
-                    for="my-modal-3"
-                    class="btn modal-button btn-info btn-outline w-[46%]"
-                    ><i class="fa-solid fa-circle-info mr-2"></i>SEE
-                    DETAILS</label
-                  >
-                  <button class="btn btn-secondary btn-outline w-[46%]">
-                    <i class="fa-solid fa-bag-shopping mr-2"></i>Buy Now
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
           <!-- modal content -->
           <input type="checkbox" id="my-modal-3" class="modal-toggle" />
           <div class="modal">
-            <div class="modal-box relative flex flex-col gap-3">
+            <div class="modal-box relative">
               <label
                 for="my-modal-3"
                 class="btn btn-sm btn-circle absolute right-2 top-2"
                 >✕</label
               >
-              <img
-                src="images/honey.jpg"
-                class="w-[100%] h-[200px] mx-auto object-cover"
-                alt="honey jar photo"
-              />
-              <h3 class="text-xl">
-                <span class="text-violet-700">PRODUCT: </span>Honey
-              </h3>
-              <p class="text-base">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est,
-                minima illo doloribus velit officia nisi ea vero dignissimos
-                quibusdam quos atque repudiandae dolores laudantium beatae!
-                Accusamus suscipit delectus id numquam.
-              </p>
-              <div>
-                <h3 class="text-xl text-violet-700 mb-1">FEATURES:</h3>
-                <p class="text-base">feature1, feature2, feature3, feature4</p>
-              </div>
-              <h3 class="text-xl">
-                <span class="text-violet-700">PRICE: </span>$1200.00
-              </h3>
+              <!-- modal details -->
+              <div id="modal-details"></div>
             </div>
           </div>
         </div>
@@ -196,46 +144,33 @@
           >
             <!-- Sidebar content here -->
             <h1 class="text-2xl text-center font-semibold my-2">CART ITEMS</h1>
-            <div
-              class="my-3 flex items-center justify-between rounded-md shadow-xl bg-slate-100 px-3 py-2"
-            >
-              <img
-                class="w-[15%]"
-                src="images/product-placeholder.png"
-                alt=""
-              />
-              <p class="text-xl font-semibold">Redmi 11C</p>
-              <input
-                type="text"
-                class="border-2 border-green-600 w-12 text-center rounded-md h-8"
-                value="1"
-              />
-              <span
-                ><i class="fa-solid fa-trash text-xl text-red-700"></i
-              ></span>
+            <div id="cart-item-container">
+              <!-- cart item is here -->
             </div>
             <button
-              class="bg-red-600 w-1/2 mx-auto rounded-lg py-2 text-white hover:bg-red-800 duration-500 my-3"
+              class="bg-red-600 w-1/2 mx-auto rounded-lg py-2 text-white hover:bg-red-800 duration-500 my-3 hidden"
+              onclick="clearBtn()"
+              id="clear-btn"
             >
               CLEAR CART
             </button>
             <div class="bg-slate-700 p-5 rounded-md my-3">
               <div class="flex justify-between">
                 <p class="text-yellow-400 text-lg">PRODUCT COUNT:</p>
-                <span class="text-white">$0</span>
+                <span id="product-count" class="text-white">0</span>
               </div>
               <div class="flex justify-between">
                 <p class="text-yellow-400 text-lg">PRICE:</p>
-                <span class="text-white">$0</span>
+                <span class="text-white" id="price">0</span>
               </div>
               <div class="flex justify-between">
-                <p class="text-yellow-400 text-lg">TAX:</p>
-                <span class="text-white">$0</span>
+                <p class="text-yellow-400 text-lg">VAT:</p>
+                <span class="text-white" id="vat">0</span>
               </div>
               <hr class="my-3" />
               <div class="flex justify-between">
                 <p class="text-yellow-400 text-lg">TOTAL PRICE:</p>
-                <span class="text-white">$0</span>
+                <span class="text-white" id="total-price">0</span>
               </div>
             </div>
           </ul>
@@ -297,5 +232,6 @@
         </p>
       </div>
     </footer>
+    <script src="js/script.js"></script>
   </body>
 </html>
