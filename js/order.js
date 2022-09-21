@@ -3,12 +3,13 @@ let newPrice = 0;
 let vat = 0;
 let cart = [];
 
-const localData = getLocalStorage('cart');
+// const localData = getLocalStorage('cart');
+const localOrder = getLocalStorage('order')
 
 function displayData(data) {
     const homepageContainer = document.getElementById("homepage-container");
     const orderMessage = document.getElementById('order-message');
-    if(localData.length > 0){
+    if(localOrder.length > 0){
         orderMessage.innerHTML = `<p class="text-xl text-center my-6 italic">Thanks For Your Order!</p>`
     } else{
         orderMessage.innerHTML = `<p class="text-xl text-center my-6 italic">No Order Found!!</p>`
@@ -55,7 +56,7 @@ function displayData(data) {
     });
   }
 
-  displayData(localData);
+  displayData(localOrder);
 
   function displayPrevData(){
     const cartContainer = document.getElementById("cart-item-container");
