@@ -1,4 +1,8 @@
 let allData;
+let count = 0;
+let newPrice = 0;
+let vat = 0;
+let cart = [];
 fetch("../data.json")
   .then((res) => res.json())
   .then((data) => {
@@ -84,19 +88,32 @@ function handleModal(id) {
       </h3>
   `;
 }
-let count = 0;
-let newPrice = 0;
-let vat = 0;
-function handleBuyNow(id){
+
+function handleBuyNow(id) {
   count++;
-  document.getElementById('clear-btn').classList.remove('hidden')
-  const product = allData.find(item => item.id === id);
-  const {img, name, price} = product;
+  document.getElementById("clear-btn").classList.remove("hidden");
+  const product = allData.find((item) => item.id === id);
+  const { id: productId, img, name, price } = product;
+  cart.push(product);
   newPrice = newPrice + price;
-  vat = newPrice * 0.15
-  const cartContainer = document.getElementById('cart-item-container');
-  const divContainer = document.createElement('div');
-  divContainer.classList.add('my-3', 'flex', 'items-center', 'justify-between', 'rounded-md', 'shadow-xl', 'bg-slate-100', 'px-3', 'py-2');
+  vat = newPrice * 0.15;
+
+  const localData = getLocalStorage('cart');
+  setLocalStorage('cart', [...localData, product]);
+
+  const cartContainer = document.getElementById("cart-item-container");
+  const divContainer = document.createElement("div");
+  divContainer.classList.add(
+    "my-3",
+    "flex",
+    "items-center",
+    "justify-between",
+    "rounded-md",
+    "shadow-xl",
+    "bg-slate-100",
+    "px-3",
+    "py-2"
+  );
   divContainer.innerHTML = `
       <img
       class="w-[15%]"
@@ -109,24 +126,152 @@ function handleBuyNow(id){
       class="border-2 border-green-600 w-12 text-center rounded-md h-8"
       value="1"
     />
-    <button><i class="fa-solid fa-trash text-xl text-red-700"></i></button>
+    <button onclick="handleRemove('${productId}')"><i class="fa-solid fa-trash text-xl text-red-700"></i></button>
   `;
   cartContainer.appendChild(divContainer);
-  document.getElementById('product-count').innerText = count;
-  document.getElementById('cart-count').innerText = count;
-  document.getElementById('price').innerText = newPrice.toFixed(2);
-  document.getElementById('vat').innerText = vat.toFixed(2);
-  document.getElementById('total-price').innerText = (newPrice + vat).toFixed(2);
+  document.getElementById("product-count").innerText = count;
+  document.getElementById("cart-count").innerText = count;
+  document.getElementById("price").innerText = newPrice.toFixed(2);
+  document.getElementById("vat").innerText = vat.toFixed(2);
+  document.getElementById("total-price").innerText = (newPrice + vat).toFixed(
+    2
+  );
 }
 
-function clearBtn(){
-  document.getElementById('cart-item-container').innerHTML = '';
-  document.getElementById('clear-btn').classList.add('hidden');
-  document.getElementById('product-count').innerText = count - count;
-  document.getElementById('cart-count').innerText = count - count;
-  document.getElementById('price').innerText = newPrice - newPrice;
-  document.getElementById('vat').innerText = vat - vat;
-  document.getElementById('total-price').innerText = 0;
+function clearBtn() {
+  document.getElementById("cart-item-container").innerHTML = "";
+  document.getElementById("clear-btn").classList.add("hidden");
+  document.getElementById("cart-count").innerText = 0;
+  count = 0;
 }
 
+function handleRemove(id) {
+  const cartContainer = document.getElementById("cart-item-container");
+  cartContainer.innerHTML = "";
+  count--;
 
+  document.getElementById("clear-btn").classList.remove("hidden");
+  const product = cart.filter((item) => item.id !== id);
+  cart = product;
+
+  setLocalStorage('cart', cart)
+
+  product.forEach((data) => {
+    const { id: productId, img, name, price } = data;
+    newPrice = newPrice - price;
+    vat = newPrice * 0.15;
+
+    const divContainer = document.createElement("div");
+  divContainer.classList.add(
+    "my-3",
+    "flex",
+    "items-center",
+    "justify-between",
+    "rounded-md",
+    "shadow-xl",
+    "bg-slate-100",
+    "px-3",
+    "py-2"
+  );
+  divContainer.innerHTML = `
+      <img
+      class="w-[15%]"
+      src="${img}"
+      alt=""
+    />
+    <p class="text-base font-semibold">${name}</p>
+    <input
+      type="text"
+      class="border-2 border-green-600 w-12 text-center rounded-md h-8"
+      value="1"
+    />
+    <button onclick="handleRemove('${productId}')"><i class="fa-solid fa-trash text-xl text-red-700"></i></button>
+  `;
+  cartContainer.appendChild(divContainer);
+  });
+
+  document.getElementById("product-count").innerText = '';
+  document.getElementById("product-count").innerText = count;
+
+  document.getElementById("cart-count").innerText = '';
+  document.getElementById("cart-count").innerText = count;
+
+  document.getElementById("price").innerText = '';
+  document.getElementById("price").innerText = newPrice.toFixed(2);
+
+  document.getElementById("vat").innerText = '';
+  document.getElementById("vat").innerText = vat.toFixed(2);
+
+  document.getElementById("total-price").innerText = '';
+  document.getElementById("total-price").innerText = (newPrice + vat).toFixed(
+    2
+  );
+}
+
+function clearBtn() {
+  document.getElementById("cart-item-container").innerHTML = "";
+  document.getElementById("clear-btn").classList.add("hidden");
+  document.getElementById("cart-count").innerText = 0;
+  count = 0;
+}
+
+function displayPrevData(){
+  const localData = getLocalStorage('cart');
+  const cartContainer = document.getElementById("cart-item-container");
+  cartContainer.innerHTML = "";
+  count = localData.length || 0;
+  cart = localData; 
+
+  localData.forEach(data => {
+    const { id: productId, img, name, price } = data;
+    newPrice = newPrice + price;
+    vat = newPrice * 0.15;
+
+    const divContainer = document.createElement("div");
+  divContainer.classList.add(
+    "my-3",
+    "flex",
+    "items-center",
+    "justify-between",
+    "rounded-md",
+    "shadow-xl",
+    "bg-slate-100",
+    "px-3",
+    "py-2"
+  );
+  divContainer.innerHTML = `
+      <img
+      class="w-[15%]"
+      src="${img}"
+      alt=""
+    />
+    <p class="text-base font-semibold">${name}</p>
+    <input
+      type="text"
+      class="border-2 border-green-600 w-12 text-center rounded-md h-8"
+      value="1"
+    />
+    <button onclick="handleRemove('${productId}')"><i class="fa-solid fa-trash text-xl text-red-700"></i></button>
+  `;
+  cartContainer.appendChild(divContainer);
+  })
+
+  document.getElementById("product-count").innerText = '';
+  document.getElementById("product-count").innerText = count;
+
+  document.getElementById("cart-count").innerText = '';
+  document.getElementById("cart-count").innerText = count;
+
+  document.getElementById("price").innerText = '';
+  document.getElementById("price").innerText = newPrice.toFixed(2);
+
+  document.getElementById("vat").innerText = '';
+  document.getElementById("vat").innerText = vat.toFixed(2);
+
+  document.getElementById("total-price").innerText = '';
+  document.getElementById("total-price").innerText = (newPrice + vat).toFixed(
+    2
+  );
+}
+
+displayPrevData();

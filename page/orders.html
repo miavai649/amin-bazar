@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="../images/favicon.ico"
+      type="image/x-icon"
+    />
     <title>Amin Bazar</title>
     <!-- DAISYUi CDN -->
     <link
@@ -31,7 +35,7 @@
         <div class="flex-1 ml-7">
           <img
             class="w-10 md:w-14"
-            src="images/cart-logo.png"
+            src="../images/cart-logo.png"
             alt="company logo"
           />
           <span
@@ -113,9 +117,8 @@
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content mb-56">
           <!-- Page content here -->
-          <h1 class="text-center font-bold text-3xl my-14">
-            NEW PRODUCT IN OUR STORE
-          </h1>
+          <h1 class="text-center font-bold text-3xl my-14">ORDER HISTORY</h1>
+          <p id="order-message"></p>
           <!-- HOME PAGE -->
           <div
             class="max-w-[1280px] mx-10 lg:mx-auto grid md:grid-cols-3 sm:grid-cols-2 gap-5"
@@ -238,7 +241,7 @@
         </p>
       </div>
     </footer>
-    <script src="js/storage.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/order.js"></script>
   </body>
 </html>
